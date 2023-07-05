@@ -11,10 +11,41 @@
    ];
    
 
+   //Snack 2
+   //Con un form passare come parametri GET name, mail e age e verificare 
+   //(cercando i metodi che non conosciamo nella documentazione) che name sia più lungo di 3 caratteri, 
+   // che mail contenga un punto e una chiocciola e che age sia un numero. Se tutto è ok stampare “Accesso riuscito”, altrimenti “Accesso negato”
+   
+   
+   if (isset($_GET['name']) && isset($_GET['mail']) && isset($_GET['age'])) {
+       $name = $_GET['name'];
+       $mail = $_GET['mail'];
+       $age = $_GET['age'];
+   
+       // Verifica che name sia più lungo di 3 caratteri
+       if (strlen($name) > 3) {
+           // Verifica che mail contenga un punto e una chiocciola
+           if (strpos($mail, '.') !== false && strpos($mail, '@') !== false) {
+               // Verifica che age sia un numero
+               if (is_numeric($age)) {
+                   echo "Accesso riuscito";
+               } else {
+                   echo "Accesso negato";
+               }
+           } else {
+               echo "Accesso negato";
+           }
+       } else {
+           echo "Accesso negato";
+       }
+   } else {
+       echo "Accesso negato";
+   }
+   ?>
+   
    
 
 
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +56,7 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- 1 -->
        <ul> 
             <?php foreach ($partite as $partita){ ?> 
                 <li>
@@ -32,6 +64,23 @@
                 <?php }?>
                 
        </ul> 
+
+       <hr>
+    <!-- 2 -->
+    <h1>Verifica Accesso</h1>
+    
+    <form method="GET" action="">
+        <label for="name">Nome:</label>
+             <input type="text" name="name" id="name" >
+
+        <label for="mail">Email:</label>
+            <input type="email" name="mail" id="mail" >
+
+        <label for="age">Età:</label>
+            <input type="number" name="age" id="age" >
+
+        <input type="submit" value="Verifica Accesso">
+    </form>
         
     
     
